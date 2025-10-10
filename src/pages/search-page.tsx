@@ -1,8 +1,14 @@
 import PlaceCard from '../components/place-card/place-card';
-import { PlaceProp } from '../components/place-card/place-card.types';
-import { placeCardMock } from '../mock/place-card.mock';
+import { PlaceCardInfo } from '../components/place-card/place-card.types';
 
-function searchPage(): JSX.Element {
+type SearchPageProp = {
+  cardCount: number;
+  placeCardInfo: PlaceCardInfo;
+}
+
+const MAX_CARDS = 5;
+
+function SearchPage({cardCount, placeCardInfo}: SearchPageProp): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -93,7 +99,9 @@ function searchPage(): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {placeCardMock.amsterdam.map((data: PlaceProp) => <PlaceCard key={data.id} {...data} />)}
+                {placeCardInfo.amsterdam
+                  .slice(0, cardCount < MAX_CARDS ? cardCount : MAX_CARDS)
+                  .map((data) => <PlaceCard key={data.id} {...data} />)}
               </div>
             </section>
             <div className="cities__right-section">
@@ -106,4 +114,4 @@ function searchPage(): JSX.Element {
   );
 }
 
-export default searchPage;
+export default SearchPage;
