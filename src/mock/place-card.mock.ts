@@ -1,48 +1,119 @@
-import { PLACE_TYPE } from '../components/place-card/place-card.types';
-import { PlaceCardInfo } from '../components/place-card/place-card.types';
+import { Offer } from '../types/offer';
 
-
-export const placeCardMock: PlaceCardInfo = {
-  'amsterdam': [
-    {
-      id: 1,
-      description: 'Beautiful & luxurious apartment at great location',
-      cost: 120,
-      rating: 80,
-      type: PLACE_TYPE.APARTMENT,
-      img: 'img/apartment-01.jpg',
+export const OffersMock: Array<Offer> = [
+  {
+    'id': 'a5f380fd-1a9a-436d-a6b3-75e1a6854473',
+    'title': 'Canal View Prinsengracht',
+    'type': 'house',
+    'price': 665,
+    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/10.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
     },
-    {
-      id: 2,
-      description: 'Wood and stone place',
-      cost: 80,
-      rating: 80,
-      type: PLACE_TYPE.ROOM,
-      img: 'img/apartment-02.jpg',
+    'location': {
+      'latitude': 48.86861,
+      'longitude': 2.342499,
+      'zoom': 16
     },
-    {
-      id: 3,
-      description: 'Canal View Prinsengracht',
-      cost: 132,
-      rating: 80,
-      type: PLACE_TYPE.APARTMENT,
-      img: 'img/apartment-03.jpg',
+    'isFavorite': false,
+    'isPremium': true,
+    'rating': 3.9
+  },
+  {
+    'id': 'f0abe03a-87b6-4819-9608-43b75aab58e4',
+    'title': 'The Joshua Tree House',
+    'type': 'apartment',
+    'price': 171,
+    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/14.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
     },
-    {
-      id: 4,
-      description: 'Nice, cozy, warm big bed apartment',
-      cost: 180,
-      rating: 100,
-      type: PLACE_TYPE.APARTMENT,
-      img: 'img/apartment-02.jpg',
+    'location': {
+      'latitude': 48.85861,
+      'longitude': 2.330499,
+      'zoom': 16
     },
-    {
-      id: 5,
-      description: 'Nice, cozy, warm big bed apartment',
-      cost: 80,
-      rating: 80,
-      type: PLACE_TYPE.ROOM,
-      img: 'img/apartment-01.jpg',
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 4.6
+  },
+  {
+    'id': '0ca761c2-5145-411d-9462-b4b85c46ea0a',
+    'title': 'Beautiful & luxurious apartment at great location',
+    'type': 'hotel',
+    'price': 169,
+    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/5.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
     },
-  ]
-};
+    'location': {
+      'latitude': 48.83461,
+      'longitude': 2.335499,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 1.6
+  },
+  {
+    'id': 'ee6112f6-630b-449a-aa26-f522f756b36a',
+    'title': 'Penthouse, 4-5 rooms + 5 balconies',
+    'type': 'house',
+    'price': 293,
+    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/5.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 48.85761,
+      'longitude': 2.358499,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 4.2
+  },
+  {
+    'id': '907402a3-7aca-453b-a428-b766844e9226',
+    'title': 'Amazing and Extremely Central Flat',
+    'type': 'house',
+    'price': 471,
+    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 48.87561,
+      'longitude': 2.375499,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 2
+  },
+];

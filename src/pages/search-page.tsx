@@ -1,14 +1,11 @@
 import PlaceCard from '../components/place-card/place-card';
-import { PlaceCardInfo } from '../components/place-card/place-card.types';
+import { Offer } from '../types/offer';
 
 type SearchPageProp = {
-  cardCount: number;
-  placeCardInfo: PlaceCardInfo;
+  offers: Array<Offer>;
 }
 
-const MAX_CARDS = 5;
-
-function SearchPage({cardCount, placeCardInfo}: SearchPageProp): JSX.Element {
+function SearchPage({ offers }: SearchPageProp): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -99,9 +96,7 @@ function SearchPage({cardCount, placeCardInfo}: SearchPageProp): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {placeCardInfo.amsterdam
-                  .slice(0, cardCount < MAX_CARDS ? cardCount : MAX_CARDS)
-                  .map((data) => <PlaceCard key={data.id} {...data} />)}
+                {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} />)}
               </div>
             </section>
             <div className="cities__right-section">
