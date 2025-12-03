@@ -9,8 +9,13 @@ type PlaceCardProp = {
 function PlaceCard({ offer }: PlaceCardProp): JSX.Element {
   const { title, type, price, rating, previewImage } = offer;
 
+  function handleActiveCard(): void {}
+
   return (
-    <article className="cities__card place-card">
+    <article
+      onMouseEnter={handleActiveCard}
+      className="cities__card place-card"
+    >
       <div className="place-card__mark">
         <span>Premium</span>
       </div>

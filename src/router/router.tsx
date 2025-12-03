@@ -1,7 +1,7 @@
 import Layout from '@/components/layout/layout';
 import PrivateRoute from '@/components/private-route/private-route';
 import { AppRoute, AuthorizationStatus } from '@/const';
-import { OffersMock } from '@/mock/place-card.mock';
+import { OffersMock } from '@/mock/offers.mock';
 import { FavoritesPage } from '@/pages/favorites-page';
 import { LoginPage } from '@/pages/login-page';
 import NotFoundPage from '@/pages/not-found-page/not-found-page';

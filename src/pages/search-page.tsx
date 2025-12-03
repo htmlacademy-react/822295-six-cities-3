@@ -1,5 +1,5 @@
 import Locations from '@/components/locations/locations';
-import PlaceCard from '@/components/place-card/place-card';
+import PlaceCardList from '@/components/place-card-list';
 import { Offer } from '@/types/offer';
 
 type SearchPageProp = {
@@ -33,9 +33,7 @@ function SearchPage({ offers }: SearchPageProp): JSX.Element {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} />)}
-            </div>
+            <PlaceCardList offers={offers} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
