@@ -1,5 +1,5 @@
 import { OfferListItem } from '@/types/offer';
-import PlaceCard from './place-card/place-card';
+import PlaceCard from '../place-card/place-card';
 
 type PlaceCardListProp = {
   offers: Array<OfferListItem>;
