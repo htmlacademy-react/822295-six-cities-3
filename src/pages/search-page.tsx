@@ -1,9 +1,9 @@
 import Locations from '@/components/locations/locations';
 import PlaceCardList from '@/components/place-card-list';
-import { Offer } from '@/types/offer';
+import { OfferListItem } from '@/types/offer';
 
 type SearchPageProp = {
-  offers: Array<Offer>;
+  offers: Array<OfferListItem>;
 }
 
 function SearchPage({ offers }: SearchPageProp): JSX.Element {

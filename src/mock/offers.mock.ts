@@ -1,6 +1,6 @@
-import { Offer } from '../types/offer';
+import { OfferListItem } from '../types/offer';
 
-export const OffersMock: Array<Offer> = [
+export const OffersMock: Array<OfferListItem> = [
   {
     'id': 'a5f380fd-1a9a-436d-a6b3-75e1a6854473',
     'title': 'Canal View Prinsengracht',
@@ -43,7 +43,7 @@ export const OffersMock: Array<Offer> = [
       'longitude': 2.330499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 4.6
   },
@@ -66,7 +66,7 @@ export const OffersMock: Array<Offer> = [
       'longitude': 2.335499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 1.6
   },

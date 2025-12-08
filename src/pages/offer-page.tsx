@@ -1,4 +1,4 @@
-export function OfferPage(): JSX.Element {
+function OfferPage(): JSX.Element {
   return (
     <main className="page__main page__main--offer">
       <section className="offer">
@@ -307,3 +307,5 @@ export function OfferPage(): JSX.Element {
     </main>
   );
 }
+
+export default OfferPage;
