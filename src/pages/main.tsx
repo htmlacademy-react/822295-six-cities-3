@@ -3,11 +3,11 @@ import PlaceCardList from '@/components/place-card-list/place-card-list';
 import { OfferListItem } from '@/types/offer';
 import { useState } from 'react';
 
-type SearchPageProp = {
+type MainPageProp = {
   offers: Array<OfferListItem>;
 }
 
-function SearchPage({ offers }: SearchPageProp): JSX.Element {
+function MainPage({ offers }: MainPageProp): JSX.Element {
   const [cardState, setCardState] = useState(false);
 
   return (
@@ -46,4 +46,4 @@ function SearchPage({ offers }: SearchPageProp): JSX.Element {
   );
 }
 
-export default SearchPage;
+export default MainPage;
