@@ -3,7 +3,7 @@ import PlaceCard from '../place-card/place-card';
 
 type PlaceCardListProp = {
   offers: Array<OfferListItem>;
-  onChangeCardState: (state: boolean) => void;
+  onChangeCardState: (offer: OfferListItem | null) => void;
 }
 
 function PlaceCardList({ offers, onChangeCardState }: PlaceCardListProp): JSX.Element {
