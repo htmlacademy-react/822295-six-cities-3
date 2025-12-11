@@ -21,10 +21,13 @@ function MainPage({ offers }: MainPageProp): JSX.Element {
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">312 places to stay in Amsterdam</b>
-            <Sorting/>
+            <Sorting />
             <PlaceCardList offers={offers} onChangeCardState={(offer: OfferListItem | null) => setSelectedOffer(offer)} />
           </section>
-          <CityMap selectedOffer={selectedOffer} />
+
+          <div className="cities__right-section">
+            <CityMap blockName={'cities'} selectedOffer={selectedOffer} />
+          </div>
         </div>
       </div>
     </main>

@@ -1,3 +1,5 @@
+import CityMap from '@/components/city-map/city-map';
+
 function OfferPage(): JSX.Element {
   return (
     <main className="page__main page__main--offer">
@@ -197,7 +199,7 @@ function OfferPage(): JSX.Element {
             </section>
           </div>
         </div>
-        <section className="offer__map map"></section>
+        <CityMap blockName={'offer'} selectedOffer={selectedOffer} />
       </section>
       <div className="container">
         <section className="near-places places">

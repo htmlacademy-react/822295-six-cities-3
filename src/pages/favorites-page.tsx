@@ -2,6 +2,7 @@ import FavoriteListEmpty from '@/components/favorite-list-empty/favorite-list-em
 import FavoriteList from '@/components/favorites-list/favorite-list';
 import Logo from '@/components/logo/logo';
 import { OfferListItem } from '@/types/offer';
+import clsx from 'clsx';
 import { Fragment } from 'react';
 
 type FavoritesPageProp = {
@@ -14,14 +15,14 @@ function FavoritesPage({ offers }: FavoritesPageProp): JSX.Element {
 
   return (
     <Fragment>
-      <main className="page__main page__main--favorites page__main--favorites-empty">
+      <main className={clsx('page__main', 'page__main--favorites', isFavoritesEmpty ? 'page__main--favorites-empty' : '')}>
         <div className="page__favorites-container container">
-          {isFavoritesEmpty ? <FavoriteListEmpty /> : <FavoriteList favoritesOffers={offers} />}
+          {isFavoritesEmpty ? <FavoriteListEmpty /> : <FavoriteList favoritesOffers={favoritesOffers} />}
         </div>
       </main>
-      
+
       <footer className="footer">
-        <Logo type={'footer'}/>
+        <Logo type={'footer'} />
       </footer>
     </Fragment>
   );
