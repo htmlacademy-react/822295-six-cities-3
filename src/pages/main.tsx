@@ -26,7 +26,7 @@ function MainPage({ offers }: MainPageProp): JSX.Element {
           </section>
 
           <div className="cities__right-section">
-            <CityMap blockName={'cities'} selectedOffer={selectedOffer} />
+            <CityMap blockName={'cities'} />
           </div>
         </div>
       </div>

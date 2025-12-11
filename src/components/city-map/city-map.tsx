@@ -1,12 +1,11 @@
-import { OfferListItem } from '@/types/offer';
 import clsx from 'clsx';
 
 type CityMapProps = {
-  selectedOffer?: OfferListItem | null;
+  // selectedOffer?: OfferListItem | null;
   blockName: 'cities' | 'offer';
 }
 
-function CityMap({blockName, selectedOffer} : CityMapProps): JSX.Element {
+function CityMap({blockName} : CityMapProps): JSX.Element {
   const placeClass: string = `${blockName}__map`;
 
   return (

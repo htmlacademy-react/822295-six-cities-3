@@ -199,7 +199,7 @@ function OfferPage(): JSX.Element {
             </section>
           </div>
         </div>
-        <CityMap blockName={'offer'} selectedOffer={selectedOffer} />
+        <CityMap blockName={'offer'} />
       </section>
       <div className="container">
         <section className="near-places places">
