@@ -1,5 +1,5 @@
 import FavoriteListEmpty from '@/components/favorite-list-empty/favorite-list-empty';
-import FavoriteList from '@/components/favorites-list/favorite-list';
+import FavoriteList from '@/components/favorite-list/favorite-list';
 import Logo from '@/components/logo/logo';
 import { OfferListItem } from '@/types/offer';
 import clsx from 'clsx';

@@ -6,7 +6,7 @@ import FavoritesPage from '@/pages/favorites-page';
 import LoginPage from '@/pages/login-page';
 import NotFoundPage from '@/pages/not-found-page/not-found-page';
 import OfferPage from '@/pages/offer-page';
-import MainPage from '@/pages/main';
+import MainPage from '@/pages/main-page';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const router = createBrowserRouter([
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
       },
       {
         path: AppRoute.Offer,
-        element: <OfferPage />,
+        element: <OfferPage offer={OffersMock[0]} />,
       },
       {
         path: AppRoute.Favorites,

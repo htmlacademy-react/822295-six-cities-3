@@ -1,8 +1,8 @@
 import { OfferListItem } from '@/types/offer';
-import { calculateOfferRating } from '@/utils/offer.utils';
 import Mark from '../mark/mark';
 import Bookmark from '../bookmark/bookmark';
 import clsx from 'clsx';
+import Rating from '../rating/rating';
 
 type PlaceCardProp = {
   offer: OfferListItem;
@@ -61,7 +61,7 @@ function PlaceCard({ offer, viewType, onChangeCardState = () => { } }: PlaceCard
       onMouseLeave={() => onChangeCardState?.(null)}
       className={viewTypeClass[viewType].article}
     >
-      {offer.isPremium ? <Mark /> : null}
+      {offer.isPremium && <Mark containerClass={'place-card__mark'} />}
       <div className={viewTypeClass[viewType].imageWrapper}>
         <a href="#">
           <img className="place-card__image" src={previewImage} width={imageSize[viewType].width} height={imageSize[viewType].height} alt="Place image" />
@@ -73,14 +73,9 @@ function PlaceCard({ offer, viewType, onChangeCardState = () => { } }: PlaceCard
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <Bookmark isFavorite={offer.isFavorite}/>
+          <Bookmark isFavorite={offer.isFavorite} blockClass={'place-card'} />
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: `${calculateOfferRating(rating)}%` }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating rating={rating} blockClass={'place-card'} />
         <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>
