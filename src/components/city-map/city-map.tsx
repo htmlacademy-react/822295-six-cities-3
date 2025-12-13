@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 type CityMapProps = {
-  // selectedOffer?: OfferListItem | null;
+  // selectedOffer: OfferListItem | null;
   blockName: 'cities' | 'offer';
 }
 
