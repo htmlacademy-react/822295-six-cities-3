@@ -1,7 +1,6 @@
 import { capitalizeFirst } from '@/utils/utils';
 import PlaceCardList from '../place-card-list/place-card-list';
 import Sorting from '../sorting/sorting';
-import { useState } from 'react';
 import { OfferListItem } from '@/types/offer';
 import { LocationName } from '@/const';
 
