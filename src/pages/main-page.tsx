@@ -17,8 +17,8 @@ type MainPageProp = {
 
 function MainPage({ offers }: MainPageProp): JSX.Element {
   const city = useLocation().pathname.replace('/city/', '');
-  const amsterdamOffers = getOffersByCity(offers, 'Amsterdam');
-  const isOffersEmpty = amsterdamOffers.length === 0;
+  const offersByCity = getOffersByCity(offers, city);
+  const isOffersEmpty = offersByCity.length === 0;
 
   const [selectedOffer, setSelectedOffer] = useState<OfferListItem | undefined>(undefined);
 
@@ -40,10 +40,10 @@ function MainPage({ offers }: MainPageProp): JSX.Element {
         <Locations currentCity={city} />
         <div className="cities">
           <div className="cities__places-container container">
-            {isOffersEmpty ? <PlacesEmpty /> : <Places offers={offers} city={city} onOfferHover={handleOfferHover} />}
+            {isOffersEmpty ? <PlacesEmpty /> : <Places offers={offersByCity} city={city} onOfferHover={handleOfferHover} />}
 
             <div className="cities__right-section">
-              {!isOffersEmpty && <CityMap blockName={'cities'} cityOffersList={amsterdamOffers} selectedOffer={selectedOffer} />}
+              {!isOffersEmpty && <CityMap blockName={'cities'} cityOffersList={offersByCity} selectedOffer={selectedOffer} />}
             </div>
           </div>
         </div>
