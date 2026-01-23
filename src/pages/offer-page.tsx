@@ -6,7 +6,6 @@ import Mark from '@/components/mark/mark';
 import NearPlaceList from '@/components/near-place-list/near-place-list';
 import Rating from '@/components/rating/rating';
 import ReviewList from '@/components/review-list/review-list';
-import ReviewsForm from '@/components/reviews-form/reviews-form';
 import { AppRoute } from '@/const';
 import { OfferListItem } from '@/types/offer';
 import { capitalize } from '@/utils/utils';
