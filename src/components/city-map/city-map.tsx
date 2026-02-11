@@ -1,4 +1,4 @@
-import { FirstElementIndex, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '@/const';
+import { FirstElementIndex, UrlMarkerCurrent, URL_MARKER_DEFAULT, UrlMarkerDefault } from '@/const';
 import useMap from '@/hooks/useMap';
 import { OfferListItem } from '@/types/offer';
 import clsx from 'clsx';
@@ -18,14 +18,14 @@ const size = {
 };
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: UrlMarkerDefault,
   iconSize: [27, 39],
   iconAnchor: [13.5, 39],
 });
 
 
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
+  iconUrl: UrlMarkerCurrent,
   iconSize: [27, 39],
   iconAnchor: [13.5, 39],
 });
