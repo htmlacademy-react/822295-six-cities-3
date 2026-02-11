@@ -1,4 +1,4 @@
-import { FirstElementIndex, UrlMarkerCurrent, URL_MARKER_DEFAULT, UrlMarkerDefault } from '@/const';
+import { FirstElementIndex, UrlMarkerCurrent, UrlMarkerDefault } from '@/const';
 import useMap from '@/hooks/useMap';
 import { OfferListItem } from '@/types/offer';
 import clsx from 'clsx';
