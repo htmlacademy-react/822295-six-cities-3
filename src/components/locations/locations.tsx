@@ -1,13 +1,13 @@
-import { AppRoute, LocationNames } from '@/const';
+import { AppRoute, LocationName, LocationNames } from '@/const';
 import { capitalizeFirst } from '@/utils/utils';
 import clsx from 'clsx';
 import { generatePath, Link } from 'react-router-dom';
 
-type LocationsProp = {
-  currentCity: string;
+type LocationsProps = {
+  currentCity: LocationName;
 }
 
-function Locations({ currentCity } : LocationsProp): JSX.Element {
+function Locations({currentCity}: LocationsProps): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">

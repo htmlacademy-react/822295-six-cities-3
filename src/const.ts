@@ -13,16 +13,16 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const LocationNames = [
-  'paris',
-  'cologne',
-  'brussels',
-  'amsterdam',
-  'hamburg',
-  'dusseldorf',
-] as const;
+export enum LocationName {
+  Paris = 'paris',
+  Cologne = 'cologne',
+  Brussels = 'brussels',
+  Amsterdam = 'amsterdam',
+  Hamburg = 'hamburg',
+  Dusseldorf = 'dusseldorf',
+}
 
-export type LocationName = typeof LocationNames[number];
+export const LocationNames = Object.values(LocationName) as LocationName[];
 
 export const URL_MARKER_DEFAULT = './img/markup/img/pin.svg';
 export const URL_MARKER_CURRENT = './img/markup/img/pin-active.svg';

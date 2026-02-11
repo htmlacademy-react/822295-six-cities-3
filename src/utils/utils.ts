@@ -13,7 +13,7 @@ export function capitalizeFirst(str: string): string {
   return str ? str[0].toUpperCase() + str.slice(1).toLowerCase() : '';
 }
 
-export function getOffersByCity(offers: Array<OfferListItem>, cityName: string): Array<OfferListItem> {
+export function getOffersByCity(offers: Array<OfferListItem>, cityName: LocationName): Array<OfferListItem> {
   return offers.filter((offer) => offer.city.name === (capitalizeFirst(cityName)));
 }
 
