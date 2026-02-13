@@ -6,15 +6,15 @@ import { LocationName } from '@/const';
 
 type PlacesProp = {
   offers: Array<OfferListItem>;
-  city: LocationName;
+  currentCity: LocationName;
   onOfferHover?: (offerId: string | undefined) => void;
 }
 
-function Places({ offers, city, onOfferHover }: PlacesProp): JSX.Element {
+function Places({ offers, currentCity, onOfferHover }: PlacesProp): JSX.Element {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{offers.length} places to stay in {capitalizeFirst(city)}</b>
+      <b className="places__found">{offers.length} places to stay in {capitalizeFirst(currentCity)}</b>
       <Sorting />
       <PlaceCardList offers={offers} onOfferHover={onOfferHover} />
     </section>

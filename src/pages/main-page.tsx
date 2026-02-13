@@ -3,28 +3,36 @@ import Header from '@/components/header/header';
 import Locations from '@/components/locations/locations';
 import PlacesEmpty from '@/components/places-empty/places-empty';
 import Places from '@/components/places/places';
-import { AppRoute } from '@/const';
-import { OfferListItem } from '@/types/offer';
-import { getOffersByCity, isLocationName } from '@/utils/utils';
+import { AppRoute, LocationName } from '@/const';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { changeCurrentCity } from '@/store/actions';
+import { getCurrentOffers, isLocationName } from '@/utils/utils';
 import clsx from 'clsx';
-import { useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
+function MainPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-type MainPageProp = {
-  offers: Array<OfferListItem>;
-}
-
-function MainPage({ offers }: MainPageProp): JSX.Element {
-  const city = useLocation().pathname.replace('/city/', '');
-  const offersByCity = getOffersByCity(offers, city);
-  const isOffersEmpty = offersByCity.length === 0;
+  const city = useParams().city as LocationName;
+  const offers = useAppSelector((state) => state.offers);
+  const sortingOption = useAppSelector((state) => state.sortingOption);
 
   const [selectedOfferId, setSelectedOfferId] = useState<string | undefined>(undefined);
 
-  if (!isLocationName(city)) {
-    return <Navigate to={AppRoute.NotFound} replace />;
-  }
+  useEffect(() => {
+    if (isLocationName(city)) {
+      dispatch(changeCurrentCity(city));
+    } else {
+      navigate(AppRoute.NotFound);
+    }
+  }, [city, dispatch, navigate]);
+
+  const currentOffers = useMemo(() => getCurrentOffers(offers, city, sortingOption),
+    [city, offers, sortingOption]);
+
+  const isOffersEmpty = currentOffers.length === 0;
 
   const handleOfferHover = (offerId: string | undefined) => {
     setSelectedOfferId(offerId);
@@ -38,10 +46,12 @@ function MainPage({ offers }: MainPageProp): JSX.Element {
         <Locations currentCity={city} />
         <div className="cities">
           <div className="cities__places-container container">
-            {isOffersEmpty ? <PlacesEmpty /> : <Places offers={offersByCity} city={city} onOfferHover={handleOfferHover} />}
+            {isOffersEmpty
+              ? <PlacesEmpty />
+              : <Places offers={currentOffers} currentCity={city} onOfferHover={handleOfferHover}/>}
 
             <div className="cities__right-section">
-              {!isOffersEmpty && <CityMap blockName={'cities'} cityOffersList={offersByCity} selectedOfferId={selectedOfferId} />}
+              {!isOffersEmpty && <CityMap blockName={'cities'} cityOffersList={currentOffers} selectedOfferId={selectedOfferId} />}
             </div>
           </div>
         </div>

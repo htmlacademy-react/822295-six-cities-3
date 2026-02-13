@@ -1,10 +1,10 @@
-import { FirstElementIndex, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '@/const';
-import useMap from '@/hooks/useMap';
+import { FirstElementIndex, UrlMarkerCurrent, UrlMarkerDefault } from '@/const';
 import { OfferListItem } from '@/types/offer';
 import clsx from 'clsx';
 import { useEffect, useRef } from 'react';
 import { Icon, layerGroup, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import useMap from '@/hooks/use-map';
 
 type CityMapProps = {
   blockName: 'cities' | 'offer';
@@ -18,14 +18,14 @@ const size = {
 };
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: UrlMarkerDefault,
   iconSize: [27, 39],
   iconAnchor: [13.5, 39],
 });
 
 
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
+  iconUrl: UrlMarkerCurrent,
   iconSize: [27, 39],
   iconAnchor: [13.5, 39],
 });

@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
   },
   {
     path: AppRoute.City,
-    element: <MainPage offers={OffersMock} />,
+    element: <MainPage />,
   },
   {
     path: AppRoute.Offer,

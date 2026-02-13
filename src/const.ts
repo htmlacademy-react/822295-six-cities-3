@@ -13,18 +13,36 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const LocationNames = [
-  'paris',
-  'cologne',
-  'brussels',
-  'amsterdam',
-  'hamburg',
-  'dusseldorf',
-] as const;
+export enum LocationName {
+  Paris = 'paris',
+  Cologne = 'cologne',
+  Brussels = 'brussels',
+  Amsterdam = 'amsterdam',
+  Hamburg = 'hamburg',
+  Dusseldorf = 'dusseldorf',
+}
 
-export type LocationName = typeof LocationNames[number];
+export const LocationNames = Object.values(LocationName) as LocationName[];
 
-export const URL_MARKER_DEFAULT = './img/markup/img/pin.svg';
-export const URL_MARKER_CURRENT = './img/markup/img/pin-active.svg';
+export const UrlMarkerDefault = './img/markup/img/pin.svg';
+export const UrlMarkerCurrent = './img/markup/img/pin-active.svg';
 
 export const FirstElementIndex = 0;
+
+
+export enum SortingOption {
+  Popular = 'Popular',
+  PriceLowToHigh = 'PriceLowToHigh',
+  PriceHighToLow = 'PriceHighToLow',
+  TopRatedFirst = 'TopRatedFirst',
+}
+
+export const SortingOptions = Object.values(SortingOption) as SortingOption[];
+
+export const SortingOptionL10n = {
+  [SortingOption.Popular]: 'Popular',
+  [SortingOption.PriceHighToLow]: 'Price: low to high',
+  [SortingOption.PriceLowToHigh]: 'Price: high to low',
+  [SortingOption.TopRatedFirst]: 'Top rated first'
+};
+
