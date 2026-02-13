@@ -30,28 +30,19 @@ export const UrlMarkerCurrent = './img/markup/img/pin-active.svg';
 export const FirstElementIndex = 0;
 
 
-export const enum SortingOption {
+export enum SortingOption {
   Popular = 'Popular',
-  PriceLowToHigh = 'Price: low to high',
-  PriceHighToLow = 'Price: high to low',
-  TopRatedFirst = 'Top rated first',
+  PriceLowToHigh = 'PriceLowToHigh',
+  PriceHighToLow = 'PriceHighToLow',
+  TopRatedFirst = 'TopRatedFirst',
 }
 
-export const SortingOptions = [
-  {
-    option: SortingOption.Popular,
-    isActive: true,
-  },
-  {
-    option: SortingOption.PriceLowToHigh,
-    isActive: false,
-  },
-  {
-    option: SortingOption.PriceHighToLow,
-    isActive: false,
-  },
-  {
-    option: SortingOption.TopRatedFirst,
-    isActive: false,
-  },
-] as const;
+export const SortingOptions = Object.values(SortingOption) as SortingOption[];
+
+export const SortingOptionL10n = {
+  [SortingOption.Popular]: 'Popular',
+  [SortingOption.PriceHighToLow]: 'Price: low to high',
+  [SortingOption.PriceLowToHigh]: 'Price: high to low',
+  [SortingOption.TopRatedFirst]: 'Top rated first'
+};
+

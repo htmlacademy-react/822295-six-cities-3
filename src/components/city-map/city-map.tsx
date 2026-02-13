@@ -1,10 +1,10 @@
 import { FirstElementIndex, UrlMarkerCurrent, UrlMarkerDefault } from '@/const';
-import useMap from '@/hooks/useMap';
 import { OfferListItem } from '@/types/offer';
 import clsx from 'clsx';
 import { useEffect, useRef } from 'react';
 import { Icon, layerGroup, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import useMap from '@/hooks/use-map';
 
 type CityMapProps = {
   blockName: 'cities' | 'offer';
