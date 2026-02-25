@@ -46,3 +46,9 @@ export const SortingOptionL10n = {
   [SortingOption.TopRatedFirst]: 'Top rated first'
 };
 
+
+export enum APIRoute {
+  Offers = '/offers',
+}
+
+export const TIMEOUT_SHOW_ERROR = 2000;

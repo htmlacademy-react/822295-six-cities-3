@@ -1,6 +1,5 @@
 import PrivateRoute from '@/components/private-route/private-route';
 import { AppRoute, AuthorizationStatus, FirstElementIndex, LocationNames } from '@/const';
-import { OffersMock } from '@/mock/offers.mock';
 import FavoritesPage from '@/pages/favorites-page';
 import LoginPage from '@/pages/login-page';
 import NotFoundPage from '@/pages/not-found-page/not-found-page';
@@ -19,13 +18,13 @@ export const router = createBrowserRouter([
   },
   {
     path: AppRoute.Offer,
-    element: <OfferPage offers={OffersMock} />,
+    element: <OfferPage />,
   },
   {
     path: AppRoute.Favorites,
     element: (
       <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-        <FavoritesPage offers={OffersMock} />
+        <FavoritesPage />
       </PrivateRoute>
     ),
   },
