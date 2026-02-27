@@ -10,8 +10,6 @@
   text-align: center;
 }
 
-/* --- Иконка "6 городов" --- */
-
 .city-icon {
   position: relative;
   width: 90px;
@@ -28,7 +26,6 @@
   animation: float 1.8s ease-in-out infinite;
 }
 
-/* 6 "зданий" разной высоты */
 .city-icon span:nth-child(1) { left: 0; height: 30px; animation-delay: 0s; }
 .city-icon span:nth-child(2) { left: 15px; height: 45px; animation-delay: 0.2s; }
 .city-icon span:nth-child(3) { left: 30px; height: 25px; animation-delay: 0.4s; }
@@ -40,8 +37,6 @@
   0%, 100% { transform: translateY(0); opacity: 1; }
   50% { transform: translateY(-6px); opacity: 0.7; }
 }
-
-/* --- Текст --- */
 
 h1 {
   font-size: 22px;
@@ -55,26 +50,4 @@ h1 {
   color: #6b7c93;
   line-height: 1.5;
   margin-bottom: 30px;
-}
-
-/* --- Кнопка --- */
-
-.retry-button {
-  padding: 10px 24px;
-  font-size: 14px;
-  border: none;
-  border-radius: 20px;
-  background: #4481c3;
-  color: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.retry-button:hover {
-  background: #356aa3;
-  transform: translateY(-2px);
-}
-
-.retry-button:active {
-  transform: translateY(0);
 }
