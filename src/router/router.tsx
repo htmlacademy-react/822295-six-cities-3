@@ -5,7 +5,7 @@ import LoginPage from '@/pages/login-page';
 import NotFoundPage from '@/pages/not-found-page/not-found-page';
 import OfferPage from '@/pages/offer-page';
 import MainPage from '@/pages/main-page';
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 
 export const router = createBrowserRouter([

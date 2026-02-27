@@ -8,7 +8,7 @@ export const changeSort = createAction<SortingOption>('app/changeSort');
 
 export const loadOffers = createAction<Array<OfferListItem>>('data/loadOffers');
 export const setError = createAction<string | null>('data/setError');
+export const loadOffersError = createAction<string | null>('data/loadOffersError');
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
-

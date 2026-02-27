@@ -3,7 +3,7 @@ import { OfferListItem } from '@/types/offer';
 import { AppDispatch, State } from '@/types/state';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus } from './actions';
+import { loadOffers, loadOffersError, requireAuthorization, setError, setOffersDataLoadingStatus } from './actions';
 import { store } from './';
 import { AuthData } from '@/types/auth-data';
 import { dropToken, saveToken } from '@/services/token';
@@ -19,21 +19,29 @@ export const clearErrorAction = createAsyncThunk(
   },
 );
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'data/fetchOffers',
-  async (_arg, { dispatch, extra: api }) => {
-    dispatch(setOffersDataLoadingStatus(true));
+export const fetchOffersAction = createAsyncThunk<
+  void,
+  undefined,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }>(
+    'data/fetchOffers',
+    async (_arg, { dispatch, extra: api }) => {
+      dispatch(setOffersDataLoadingStatus(true));
 
-    const { data } = await api.get<OfferListItem[]>('/offers');
+      try {
+        const { data } = await api.get<OfferListItem[]>('/offers');
 
-    dispatch(setOffersDataLoadingStatus(false));
-    dispatch(loadOffers(data));
-  },
-);
+        dispatch(setOffersDataLoadingStatus(false));
+        dispatch(loadOffers(data));
+        dispatch(loadOffersError(null));
+      } catch {
+        dispatch(loadOffersError('Failed to load offers. Please try again later.'));
+      }
+    },
+  );
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

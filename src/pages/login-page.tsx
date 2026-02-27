@@ -2,22 +2,29 @@ import { AppRoute } from '@/const';
 import { useAppDispatch } from '@/hooks';
 import { loginAction } from '@/store/api-actions';
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LoginPage(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (emailRef.current !== null && passwordRef.current !== null) {
-      const email = emailRef.current.value;
-      const password = passwordRef.current.value;
+    if (!emailRef.current || !passwordRef.current) {
+      return;
+    }
 
-      dispatch(loginAction({ email, password }));
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    const resultAction = await dispatch(loginAction({ email, password }));
+
+    if (loginAction.fulfilled.match(resultAction)) {
+      navigate(AppRoute.Root);
     }
   };
 
@@ -41,7 +48,7 @@ function LoginPage(): JSX.Element {
             <h1 className="login__title">Sign in</h1>
 
             <form
-              onSubmit={handleSubmit}
+              onSubmit={(evt) => void handleSubmit(evt)}
               className="login__form form"
               action="#"
               method="post"
