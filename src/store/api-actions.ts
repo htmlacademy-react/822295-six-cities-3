@@ -1,4 +1,4 @@
-import { APIRoute, TIMEOUT_SHOW_ERROR } from '@/const';
+import { TimeoutShowError } from '@/const';
 import { OfferListItem } from '@/types/offer';
 import { AppDispatch, State } from '@/types/state';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -11,7 +11,7 @@ export const clearErrorAction = createAsyncThunk(
   () => {
     setTimeout(
       () => store.dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR,
+      TimeoutShowError,
     );
   },
 );
@@ -25,7 +25,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     dispatch(setOffersDataLoadingStatus(true));
 
-    const { data } = await api.get<OfferListItem[]>(APIRoute.Offers);
+    const { data } = await api.get<OfferListItem[]>('/offedrs');
 
     dispatch(setOffersDataLoadingStatus(false));
     dispatch(loadOffers(data));
