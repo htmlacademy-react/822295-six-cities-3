@@ -2,14 +2,11 @@ import FavoriteListEmpty from '@/components/favorite-list-empty/favorite-list-em
 import FavoriteList from '@/components/favorite-list/favorite-list';
 import Header from '@/components/header/header';
 import Logo from '@/components/logo/logo';
-import { OfferListItem } from '@/types/offer';
+import { useAppSelector } from '@/hooks';
 import clsx from 'clsx';
 
-type FavoritesPageProp = {
-  offers: Array<OfferListItem>;
-}
-
-function FavoritesPage({ offers }: FavoritesPageProp): JSX.Element {
+function FavoritesPage(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const isFavoritesEmpty = offers.length === 0;
   const favoritesOffers = !isFavoritesEmpty ? offers.filter((offer) => offer.isFavorite) : [];
 

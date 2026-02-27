@@ -7,13 +7,9 @@ import NearPlaceList from '@/components/near-place-list/near-place-list';
 import Rating from '@/components/rating/rating';
 import ReviewList from '@/components/review-list/review-list';
 import { AppRoute } from '@/const';
-import { OfferListItem } from '@/types/offer';
+import { useAppSelector } from '@/hooks';
 import { capitalize } from '@/utils/utils';
 import { Navigate, useLocation } from 'react-router-dom';
-
-type OfferPageProps = {
-  offers: OfferListItem[];
-};
 
 const galleryImages: string[] = [
   'img/room.jpg',
@@ -24,8 +20,9 @@ const galleryImages: string[] = [
   'img/apartment-01.jpg',
 ];
 
-function OfferPage({ offers }: OfferPageProps): JSX.Element {
+function OfferPage(): JSX.Element {
   const offerId = useLocation().pathname.replace('/offer/', '');
+  const offers = useAppSelector((state) => state.offers);
   const currentOffer = offers.find((offer) => (offer.id === offerId));
 
   if (!currentOffer) {
