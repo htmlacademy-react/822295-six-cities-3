@@ -1,6 +1,14 @@
+import { useAppDispatch } from '@/hooks';
+import { fetchOffersAction } from '@/store/api-actions';
 import './full-page-error.css';
 
 function FullPageError(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const clickHandler = () => {
+    dispatch(fetchOffersAction());
+  };
+
   return (
     <div className="error-wrapper">
       <div className="city-icon">
@@ -17,6 +25,13 @@ function FullPageError(): JSX.Element {
         Something went wrong and six-cities is currently unavailable.
         Please try again a little later.
       </p>
+
+      <button
+        onClick={clickHandler}
+        className="retry-button"
+      >
+        Try again
+      </button>
     </div>
   );
 }
