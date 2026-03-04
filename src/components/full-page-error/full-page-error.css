@@ -51,3 +51,23 @@ h1 {
   line-height: 1.5;
   margin-bottom: 30px;
 }
+
+.retry-button {
+  padding: 10px 24px;
+  font-size: 14px;
+  border: none;
+  border-radius: 20px;
+  background: #4481c3;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.retry-button:hover {
+  background: #356aa3;
+  transform: translateY(-2px);
+}
+
+.retry-button:active {
+  transform: translateY(0);
+}

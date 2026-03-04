@@ -6,9 +6,9 @@ import FullPageError from './components/full-page-error/full-page-error';
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  const isOffersDataError = useAppSelector((state) => state.error);
+  const offersDataError = useAppSelector((state) => state.loadOffersError);
 
-  if ((isOffersDataError) !== null) {
+  if ((offersDataError) !== null) {
     return <FullPageError />;
   }
 
