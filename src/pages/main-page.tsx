@@ -5,7 +5,9 @@ import PlacesEmpty from '@/components/places-empty/places-empty';
 import Places from '@/components/places/places';
 import { AppRoute, LocationName } from '@/const';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { changeCurrentCity } from '@/store/actions';
+import { getSortingOption } from '@/store/app/app-actions.selectors';
+import { changeCurrentCity } from '@/store/app/app-actions.slice';
+import { getOffers } from '@/store/offers-data/offers-data.selectors';
 import { getCurrentOffers, isLocationName } from '@/utils/utils';
 import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
@@ -16,8 +18,8 @@ function MainPage(): JSX.Element {
   const navigate = useNavigate();
 
   const city = useParams().city as LocationName;
-  const offers = useAppSelector((state) => state.offers);
-  const sortingOption = useAppSelector((state) => state.sortingOption);
+  const offers = useAppSelector(getOffers);
+  const sortingOption = useAppSelector(getSortingOption);
 
   const [selectedOfferId, setSelectedOfferId] = useState<string | undefined>(undefined);
 
