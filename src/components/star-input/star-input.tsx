@@ -4,7 +4,7 @@ type StarInputProps = {
   value: number;
   checked: boolean;
   disabled?: boolean;
-  fieldChangeHandle: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const titleMap: { [key: number]: string } = {
@@ -15,11 +15,11 @@ const titleMap: { [key: number]: string } = {
   1: 'terribly',
 };
 
-function StarInput({ value, checked, disabled, fieldChangeHandle }: StarInputProps): JSX.Element {
+function StarInput({ value, checked, disabled, onChange }: StarInputProps): JSX.Element {
   return (
     <Fragment>
       <input
-        onChange={fieldChangeHandle}
+        onChange={onChange}
         className="form__rating-input visually-hidden"
         name="rating"
         value={value}

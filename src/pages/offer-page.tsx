@@ -8,64 +8,49 @@ import NearPlaceList from '@/components/near-place-list/near-place-list';
 import Rating from '@/components/rating/rating';
 import ReviewList from '@/components/review-list/review-list';
 import { AppRoute } from '@/const';
-import { useAppSelector } from '@/hooks';
-import { api } from '@/store';
-import { getOffers } from '@/store/data/data.selectors';
-import { Offer, OfferListItem } from '@/types/offer';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { fetchNearbyOffersAction, fetchOfferAction } from '@/store/data/data.api';
+import { getCurrentOffer, getIsCurrentOfferLoading, getIsOfferPageNotFound, getLoadCurrentOfferError, getNearbyOffers } from '@/store/data/data.selectors';
+import { OfferListItem } from '@/types/offer';
 import { capitalize } from '@/utils/utils';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-const MaxNearbyPinsOnMap = 3;
+const MAX_NEARBY_PINS = 3;
 
 function OfferPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const offerId = useParams().id as string;
 
-  const [currentOffer, setCurrentOffer] = useState<Offer | null>(null);
-  const [nearbyOffers, setNearbyOffers] = useState<OfferListItem[]>([]);
-  const [isNotFound, setIsNotFound] = useState(false);
+  const currentOffer = useAppSelector(getCurrentOffer);
+  const isCurrentOfferLoading = useAppSelector(getIsCurrentOfferLoading);
+  const loadCurrentOfferError = useAppSelector(getLoadCurrentOfferError);
+  const isOfferPageNotFound = useAppSelector(getIsOfferPageNotFound);
 
-  const offers = useAppSelector(getOffers);
-
-  const mapOffers = useMemo(() => {
-    if (!currentOffer) {
-      return [];
-    }
-
-    const offersForMap = nearbyOffers.slice(0, MaxNearbyPinsOnMap);
-    const currentOfferListItem = offers.find((offer) => offer.id === currentOffer.id);
-
-    if (currentOfferListItem) {
-      offersForMap.push(currentOfferListItem);
-    }
-
-    return offersForMap;
-  }, [nearbyOffers, currentOffer, offers]);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const mapOffers = [...nearbyOffers.slice(0, MAX_NEARBY_PINS), currentOffer] as Array<OfferListItem>;
 
   useEffect(() => {
-    const fetchPageData = async () => {
-      try {
-        const offerResponse = await api.get<Offer>(`/offers/${offerId}`);
-        const nearbyResponse = await api.get<OfferListItem[]>(`/offers/${offerId}/nearby`);
+    dispatch(fetchOfferAction({ offerId }));
+    dispatch(fetchNearbyOffersAction({ offerId }));
+  }, [dispatch, offerId]);
 
-        setCurrentOffer(offerResponse.data);
-        setNearbyOffers(nearbyResponse.data);
-      } catch {
-        setIsNotFound(true);
-      }
-    };
-
-    if (offerId) {
-      fetchPageData();
-    }
-  }, [offerId]);
-
-  if (isNotFound) {
+  if (isOfferPageNotFound) {
     return <Navigate to={AppRoute.NotFound} replace />;
   }
 
-  if (!currentOffer) {
+  if (isCurrentOfferLoading || !currentOffer) {
     return <FullPageLoading />;
+  }
+
+  if (!nearbyOffers.length) {
+    toast.warning('Failed to load nearby offers. Please try again later.');
+  }
+
+  if (loadCurrentOfferError !== null) {
+    toast.warning('Failed to load offer. Please try again later.');
   }
 
   return (
@@ -78,11 +63,11 @@ function OfferPage(): JSX.Element {
 
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {currentOffer.isPremium && <Mark containerClass={'offer__mark'} />}
+              {currentOffer?.isPremium && <Mark containerClass={'offer__mark'} />}
 
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  {currentOffer.title}
+                  {currentOffer?.title}
                 </h1>
                 <Bookmark isFavorite={currentOffer.isFavorite} blockClass={'offer'} />
               </div>
