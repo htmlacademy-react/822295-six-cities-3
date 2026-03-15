@@ -1,5 +1,7 @@
 import { saveToken, dropToken } from '@/services/token';
 import { AuthData } from '@/types/auth-data';
+import { UserComment } from '@/types/offer';
+import { ReviewFormData } from '@/types/review';
 import { ThunkOptions } from '@/types/state';
 import { UserData } from '@/types/user-data';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -42,5 +44,34 @@ export const logoutAction = createAsyncThunk<
     await api.delete('/logout');
 
     dropToken();
+  },
+);
+
+export const fetchUserCommentsAction = createAsyncThunk<
+  UserComment[],
+  string,
+  ThunkOptions
+>(
+  'user/fetchUserComments',
+  async (offerId, { extra: api }) => {
+    const { data } = await api.get<UserComment[]>(`/comments/${offerId}`);
+
+    return data;
+  },
+);
+
+export const submitUserCommentAction = createAsyncThunk<
+  UserComment,
+  ReviewFormData & { offerId: string },
+  ThunkOptions
+>(
+  'data/submitUserComment',
+  async ({ offerId, comment, rating }, { extra: api }) => {
+    const { data } = await api.post<UserComment>(`/comments/${offerId}`, {
+      comment,
+      rating,
+    });
+
+    return data;
   },
 );

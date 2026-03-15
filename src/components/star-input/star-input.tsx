@@ -2,7 +2,9 @@ import { Fragment } from 'react';
 
 type StarInputProps = {
   value: number;
-  fieldChangeHandle: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+  checked: boolean;
+  disabled?: boolean;
+  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const titleMap: { [key: number]: string } = {
@@ -13,16 +15,18 @@ const titleMap: { [key: number]: string } = {
   1: 'terribly',
 };
 
-function StarInput({ value, fieldChangeHandle }: StarInputProps): JSX.Element {
+function StarInput({ value, checked, disabled, onChange }: StarInputProps): JSX.Element {
   return (
     <Fragment>
       <input
-        onChange={fieldChangeHandle}
+        onChange={onChange}
         className="form__rating-input visually-hidden"
         name="rating"
         value={value}
         id={`${value}-stars`}
         type="radio"
+        checked={checked}
+        disabled={disabled}
       />
       <label
         htmlFor={`${value}-stars`}

@@ -9,7 +9,13 @@ export interface City {
   location: Location;
 }
 
-export type OfferListItem = {
+export interface User {
+  name: string;
+  isPro: boolean;
+  avatarUrl: string;
+}
+
+export interface OfferListItem {
   id: string;
   title: string;
   type: string;
@@ -20,4 +26,21 @@ export type OfferListItem = {
   isPremium: boolean;
   rating: number;
   previewImage: string;
+}
+
+export interface Offer extends OfferListItem {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: User;
+  images: string[];
+  maxAdults: number;
+}
+
+export type UserComment = {
+  id: string;
+  date: string;
+  user: User;
+  comment: string;
+  rating: number;
 }

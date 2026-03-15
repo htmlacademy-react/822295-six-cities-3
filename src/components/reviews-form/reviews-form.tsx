@@ -1,45 +1,66 @@
 import { useState } from 'react';
 import StarInput from '../star-input/star-input';
+import { ReviewFormData } from '@/types/review';
+import { useAppDispatch } from '@/hooks';
+import { fetchUserCommentsAction, submitUserCommentAction } from '@/store/user/user.api';
 
-type ReviewFormData = {
-  rating: number;
-  review: string;
+type ReviewsFormProps = {
+  offerId: string;
 }
 
-const StarsCount = 5;
+const STARS_COUNT = 5;
+const ZERO_RATING_COUNT = 0;
+const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 300;
 
-function ReviewsForm(): JSX.Element {
+function ReviewsForm({ offerId }: ReviewsFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<ReviewFormData>({
     rating: 0,
-    review: '',
+    comment: '',
   });
 
-  const fieldChangeHandle = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = evt.target;
 
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: name === 'rating' ? Number(value) : value,
     });
   };
 
-  const starsArray = Array.from({ length: StarsCount }, (_, i) => (i + 1)).reverse();
+  const starsArray = Array.from({ length: STARS_COUNT }, (_, i) => (i + 1)).reverse();
 
   const isFormValid =
-    formData.rating > 0 &&
-    formData.review.length >= 50 &&
-    formData.review.length <= 300;
+    formData.rating > ZERO_RATING_COUNT &&
+    formData.comment.length >= MIN_COMMENT_LENGTH &&
+    formData.comment.length <= MAX_COMMENT_LENGTH;
 
   const cleanUpForm = () => {
     setFormData({
       rating: 0,
-      review: '',
+      comment: '',
     });
   };
 
   const onFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    cleanUpForm();
+
+    setIsSubmitting(true);
+
+    dispatch(submitUserCommentAction(
+      {
+        offerId,
+        comment: formData.comment,
+        rating: formData.rating
+      }))
+      .then(() => {
+        cleanUpForm();
+        dispatch(fetchUserCommentsAction(offerId));
+      })
+      .finally(() => setIsSubmitting(false));
   };
 
   return (
@@ -52,18 +73,27 @@ function ReviewsForm(): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
 
       <div className="reviews__rating-form form__rating">
-        {starsArray.map((starValue) => <StarInput key={starValue} value={starValue} fieldChangeHandle={fieldChangeHandle} />)}
+        {starsArray.map((starValue) => (
+          <StarInput
+            key={starValue}
+            value={starValue}
+            disabled={isSubmitting}
+            onChange={handleChange}
+            checked={formData.rating === starValue}
+          />
+        ))}
       </div>
 
       <textarea
-        onChange={fieldChangeHandle}
-        value={formData.review}
+        onChange={handleChange}
+        value={formData.comment}
         className="reviews__textarea form__textarea"
         id="review"
-        name="review"
+        name="comment"
         minLength={50}
         maxLength={300}
         placeholder="Tell how was your stay, what you like and what can be improved"
+        disabled={isSubmitting}
       >
       </textarea>
 
@@ -72,7 +102,7 @@ function ReviewsForm(): JSX.Element {
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button
-          disabled={!isFormValid}
+          disabled={!isFormValid || isSubmitting}
           className="reviews__submit form__submit button"
           type="submit"
         >Submit
